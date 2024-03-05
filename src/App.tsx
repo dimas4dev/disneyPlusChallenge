@@ -1,11 +1,17 @@
 import './App.css'
-import { Header } from './components/Header'
+import { Login } from './components/Login'
+import { Header } from './components/core/Header'
 
 function App() {
 
   return (
     <>
       <Header />
+      <section className="flex justify-center items-center max-h-screen">
+
+        <Login />
+      </section>
+
     </>
   )
 }
