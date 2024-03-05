@@ -1,14 +1,24 @@
-import { useState, useCallback } from 'react';
+import { useState, ChangeEvent } from 'react';
 
-export function useInputChange(initialValue: string = '') {
-    const [value, setValue] = useState(initialValue);
+interface InputChangeHook {
+    inputs: {
+        email: string;
+        password: string;
+        search: string;
+    };
+    handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+}
 
-    const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setValue(e.target.value);
-    }, []);
+export const useInputChange = (): InputChangeHook => {
+    const [inputs, setInputs] = useState({ email: '', password: '', search: '' });
+
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = event.target;
+        setInputs(prev => ({ ...prev, [name]: value }));
+    };
 
     return {
-        value,
-        onChange: handleInputChange,
+        inputs,
+        handleInputChange,
     };
-}
+};
