@@ -1,0 +1,22 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "Bro Dunavis",
+            "email": "bro@gmail.com",
+            "password": "password"
+        },
+        {
+            "id": 2,
+            "name": "Bris Dunavis",
+            "email": "bris@gmail.com",
+            "password": "password"
+        },
+        {
+            "id": 3,
+            "name": "Brus Dunavis",
+            "email": "brus@gmail.com",
+            "password": "password"
+        }
+    ]
+}

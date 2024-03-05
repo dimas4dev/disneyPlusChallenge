@@ -4,6 +4,7 @@ import React from 'react';
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     text: string;
     colorButton?: string;
+    onclick?: () => void;
 }
 
 // Button component
