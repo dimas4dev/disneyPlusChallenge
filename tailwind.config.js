@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'button-disney-check': '#0058E1',
+      },
+    },
   },
   plugins: [],
 }
