@@ -25,16 +25,16 @@ export const Home = () => {
 
     return (
         <ResponsiveContainer>
-            {movies.map(movie => (
+            {movies.map((movie: { id: number; title: string; release_date: string; overview: string; poster_path: string }) => (
                 <MovieCard
                     key={movie.id}
                     title={movie.title}
                     releaseDate={movie.release_date}
                     overview={movie.overview}
                     posterPath={movie.poster_path}
+                    id={movie.id}
                 />
             ))}
         </ResponsiveContainer>
-
     );
 };
