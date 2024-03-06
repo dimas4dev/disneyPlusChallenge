@@ -15,4 +15,4 @@ const ResponsiveContainer: React.FC<ResponsiveContainerProps> = ({ children, cla
     );
 };
 
-export default ResponsiveContainer;
+export { ResponsiveContainer };

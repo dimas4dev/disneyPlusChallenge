@@ -5,8 +5,6 @@ import { Login } from './components/Login'
 import { Header } from './components/core/Header'
 import { ToastContainer } from 'react-toastify';
 
-import { Movies } from './pages/Movies'
-import { Series } from './pages/Series'
 import { Originals } from './pages/Originals'
 import { Watchlist } from './pages/Watchlist'
 import { Home } from './pages/Home'
@@ -25,8 +23,6 @@ function App() {
         {isLoggedIn ? (
           <Router>
             <Route path="/" component={Home} />
-            <Route path="/movies" component={Movies} />
-            <Route path="/series" component={Series} />
             <Route path="/originals" component={Originals} />
             <Route path="/watchlist" component={Watchlist} />
           </Router>

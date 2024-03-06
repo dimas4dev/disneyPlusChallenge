@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import DisneyIcon from '../../../assets/DisneyIcon.svg';
 import { InputComponent } from '../Input';
 import { Link } from 'wouter';
 import { useInputChange } from '../../../hooks/handleInputChange';
+import { Bars3BottomLeftIcon, XMarkIcon } from '@heroicons/react/24/solid'
 
 interface HeaderProps {
     isLogin?: boolean;
@@ -14,35 +16,55 @@ export const Header: React.FC<HeaderProps> = ({ isLogin = false }) => {
     const linksHeader = [
         { name: 'Home', path: '/' },
         { name: 'Watchlist', path: '/watchlist' },
-        { name: 'Movies', path: '/movies' },
-        { name: 'Series', path: '/series' },
         { name: 'Originals', path: '/originals' },
     ]
 
     const { search } = inputs;
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
         <>
             {isLogin ? (
-                <header className="flex justify-between items-center p-4">
-                    <img src={DisneyIcon} alt="DisneyIcon" className="h-24 p-2" />
-                    <InputComponent
-                        type='text'
-                        placeholder='Ingresa lo que deseas buscar'
-                        onChange={handleInputChange}
-                        value={search}
-                        name='search'
-                        id='searchInput'
-                    />
-                    <nav>
-                        <ul className="flex space-x-4 text-white">
-                            {linksHeader.map((link, index) => (
-                                <li key={index}>
-                                    <Link href={link.path}>{link.name}</Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </nav>
+                <header className="text-white p-4">
+                    <div className="flex justify-between items-center">
+                        <img src={DisneyIcon} alt="DisneyIcon" className="h-12 md:h-24" />
+                        <div className="md:hidden">
+                            <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                                {isMenuOpen ? <XMarkIcon className="h-8 w-8" /> : <Bars3BottomLeftIcon className="h-8 w-8" />}
+                            </button>
+                        </div>
+                        <div className="hidden md:block">
+                            <InputComponent
+                                type='text'
+                                placeholder='Ingresa lo que deseas buscar'
+                                onChange={handleInputChange}
+                                value={search}
+                                name='search'
+                                id='searchInput'
+                            />
+                        </div>
+                        {isMenuOpen ?
+                            <nav className={`${isMenuOpen ? 'fixed inset-0 z-50' : 'hidden'} md:hidden bg-opacity-75`}>
+                                <ul className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4 p-4 md:p-0 bg-black md:bg-transparent">
+                                    <div className="absolute top-0 right-0 p-5">
+                                        <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                                            <XMarkIcon className="h-8 w-8 text-white" />
+                                        </button>
+                                    </div>
+                                    {linksHeader.map((link, index) => (
+                                        <li key={index} className="md:ml-4">
+                                            <Link href={link.path}>{link.name}</Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </nav> :
+                            <nav className="hidden md:flex space-x-4">
+                                {linksHeader.map((link, index) => (
+                                    <Link key={index} href={link.path}>{link.name}</Link>
+                                ))}
+                            </nav>
+                        }
+                    </div>
                 </header>
             ) :
                 <header className='flex justify-center items-center h-24'>
@@ -51,3 +73,4 @@ export const Header: React.FC<HeaderProps> = ({ isLogin = false }) => {
         </>
     )
 }
+

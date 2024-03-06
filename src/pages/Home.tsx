@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { MovieCard } from '../components/core/MovieCard';
-import ResponsiveContainer from '../components/core/Container';
+import { ResponsiveContainer } from '../components/core/Container';
 
 export const Home = () => {
     const [movies, setMovies] = useState([]);
