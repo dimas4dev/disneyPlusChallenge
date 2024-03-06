@@ -3,12 +3,15 @@ import { useAuth } from '../../hooks/useAuth';
 import { Button } from '../core/Button';
 import { InputComponent } from '../core/Input';
 import { toast } from 'react-toastify';
+import { useLocalStorage } from 'usehooks-ts'
 
 
 export const Login = () => {
     const { inputs, handleInputChange } = useInputChange();
     const { login } = useAuth();
+    const [emailStorage, setEmailStorage] = useLocalStorage<string>('email', '');
 
+    const [isLoggedIn, setIsLoggedIn] = useLocalStorage<boolean>('isLoggedIn', false);
     const handleLogin = async () => {
         const { email, password } = inputs;
         try {
@@ -16,7 +19,10 @@ export const Login = () => {
             const users = await request.json();
             const user = users.find((user: { email: string; password: string; }) => user.email === email && user.password === password);
 
-            if (user) {
+            setEmailStorage(user.email);
+            setIsLoggedIn(true);
+
+            if (emailStorage) {
                 login();
                 toast.success('Sesion Iniciada', {
                     position: "top-center",

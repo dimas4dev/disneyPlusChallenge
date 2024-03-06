@@ -4,6 +4,7 @@ import { InputComponent } from '../Input';
 import { Link } from 'wouter';
 import { useInputChange } from '../../../hooks/handleInputChange';
 import { Bars3BottomLeftIcon, XMarkIcon } from '@heroicons/react/24/solid'
+import { useAuth } from '../../../hooks/useAuth';
 
 interface HeaderProps {
     isLogin?: boolean;
@@ -12,6 +13,8 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ isLogin = false }) => {
 
     const { inputs, handleInputChange } = useInputChange();
+    const { logout } = useAuth();
+
 
     const linksHeader = [
         { name: 'Home', path: '/' },
@@ -56,6 +59,7 @@ export const Header: React.FC<HeaderProps> = ({ isLogin = false }) => {
                                             <Link href={link.path}>{link.name}</Link>
                                         </li>
                                     ))}
+                                    <li ><a href="#!" onClick={() => logout()}>Cerrar Sesión</a></li>
                                 </ul>
                             </nav> :
                             <nav className="hidden md:flex space-x-4">
