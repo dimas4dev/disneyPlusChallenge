@@ -11,7 +11,7 @@ export const Login = () => {
     const { login } = useAuth();
     const [emailStorage, setEmailStorage] = useLocalStorage<string>('email', '');
 
-    const [isLoggedIn, setIsLoggedIn] = useLocalStorage<boolean>('isLoggedIn', false);
+    const [, setIsLoggedIn] = useLocalStorage<boolean>('isLoggedIn', false);
     const handleLogin = async () => {
         const { email, password } = inputs;
         try {
