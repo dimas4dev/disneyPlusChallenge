@@ -9,22 +9,31 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ isLogin = false }) => {
 
-    const { value, onChange } = useInputChange();
+    const { inputs, handleInputChange } = useInputChange();
 
     const linksHeader = [
         { name: 'Home', path: '/' },
         { name: 'Watchlist', path: '/watchlist' },
-        // { name: 'Movies', path: '/movies' },
+        { name: 'Movies', path: '/movies' },
         { name: 'Series', path: '/series' },
         { name: 'Originals', path: '/originals' },
     ]
+
+    const { search } = inputs;
 
     return (
         <>
             {isLogin ? (
                 <header className="flex justify-between items-center p-4">
                     <img src={DisneyIcon} alt="DisneyIcon" className="h-24 p-2" />
-                    <InputComponent type='text' placeholder='Ingresa lo que deseas buscar' onChange={onChange} value={value} />
+                    <InputComponent
+                        type='text'
+                        placeholder='Ingresa lo que deseas buscar'
+                        onChange={handleInputChange}
+                        value={search}
+                        name='search'
+                        id='searchInput'
+                    />
                     <nav>
                         <ul className="flex space-x-4 text-white">
                             {linksHeader.map((link, index) => (
