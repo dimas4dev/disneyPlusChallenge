@@ -22,7 +22,8 @@ export const Login = () => {
             setEmailStorage(user.email);
             setIsLoggedIn(true);
 
-            if (emailStorage) {
+
+            if (emailStorage || user) {
                 login();
                 toast.success('Sesion Iniciada', {
                     position: "top-center",

@@ -66,6 +66,7 @@ export const Header: React.FC<HeaderProps> = ({ isLogin = false }) => {
                                 {linksHeader.map((link, index) => (
                                     <Link key={index} href={link.path}>{link.name}</Link>
                                 ))}
+                                <Link href="#!" onClick={() => logout()}>Cerrar Sesión</Link>
                             </nav>
                         }
                     </div>
