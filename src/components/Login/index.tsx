@@ -2,22 +2,43 @@ import { useInputChange } from '../../hooks/handleInputChange';
 import { useAuth } from '../../hooks/useAuth';
 import { Button } from '../core/Button';
 import { InputComponent } from '../core/Input';
+import { toast } from 'react-toastify';
+
 
 export const Login = () => {
     const { inputs, handleInputChange } = useInputChange();
-    const { login } = useAuth(); // Aquí se usa el hook correctamente
+    const { login } = useAuth();
 
     const handleLogin = async () => {
         const { email, password } = inputs;
         try {
             const request = await fetch('http://localhost:3000/users');
             const users = await request.json();
-            const user = users.find((user: any) => user.email === email && user.password === password);
+            const user = users.find((user: { email: string; password: string; }) => user.email === email && user.password === password);
+
             if (user) {
                 login();
-                console.log(import.meta.env.JWT_KEY);
+                toast.success('Sesion Iniciada', {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
             } else {
-                alert('Usuario o contraseña incorrectos');
+                toast.error('Usuario Y/O Contraseña Invalidos', {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
             }
         } catch (error) {
             console.error('Error al iniciar sesión:', error);
