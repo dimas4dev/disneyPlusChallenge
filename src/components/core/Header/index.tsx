@@ -14,12 +14,10 @@ export const Header: React.FC<HeaderProps> = ({ isLogin = false }) => {
     const linksHeader = [
         { name: 'Home', path: '/' },
         { name: 'Watchlist', path: '/watchlist' },
-        { name: 'Movies', path: '/movies' },
+        // { name: 'Movies', path: '/movies' },
         { name: 'Series', path: '/series' },
         { name: 'Originals', path: '/originals' },
     ]
-
-
 
     return (
         <>
@@ -38,7 +36,7 @@ export const Header: React.FC<HeaderProps> = ({ isLogin = false }) => {
                     </nav>
                 </header>
             ) :
-                <header className='flex justify-center items-center h-24'> {/* Altura de ejemplo, ajusta según tus necesidades */}
+                <header className='flex justify-center items-center h-24'>
                     <img className="h-auto max-h-full" src={DisneyIcon} alt="DisneyIcon" />
                 </header>}
         </>

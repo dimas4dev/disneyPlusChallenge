@@ -1,13 +1,11 @@
 import React from 'react';
 
-// Props definition
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     text: string;
     colorButton?: string;
     onclick?: () => void;
 }
 
-// Button component
 export const Button: React.FC<ButtonProps> = ({ text, colorButton, ...props }) => {
     return (
         <button

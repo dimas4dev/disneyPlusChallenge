@@ -1,18 +1,38 @@
-import './App.css'
+import { Route, Router } from "wouter";
+
 import { Footer } from './components/Footer'
 import { Login } from './components/Login'
 import { Header } from './components/core/Header'
-import { AuthProvider } from './context/AuthContext'
-import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 
+import { Movies } from './pages/Movies'
+import { Series } from './pages/Series'
+import { Originals } from './pages/Originals'
+import { Watchlist } from './pages/Watchlist'
+import { Home } from './pages/Home'
+import { useAuth } from "./hooks/useAuth";
+
+import 'react-toastify/dist/ReactToastify.css';
+import './App.css'
+
 function App() {
+  const { isLoggedIn } = useAuth();
 
   return (
-    <AuthProvider>
-      <Header />
+    <>
+      <Header isLogin={isLoggedIn} />
       <section className="flex justify-center items-center max-h-screen">
-        <Login />
+        {isLoggedIn ? (
+          <Router>
+            <Route path="/" component={Home} />
+            <Route path="/movies" component={Movies} />
+            <Route path="/series" component={Series} />
+            <Route path="/originals" component={Originals} />
+            <Route path="/watchlist" component={Watchlist} />
+          </Router>
+        ) : (
+          <Login />
+        )}
       </section>
       <Footer />
       <ToastContainer
@@ -27,8 +47,7 @@ function App() {
         pauseOnHover
         theme="dark"
       />
-    </AuthProvider>
-
+    </>
   )
 }
 
