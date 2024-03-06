@@ -21,7 +21,7 @@ function App() {
   return (
     <>
       <Header isLogin={isLoggedIn} />
-      <section className="flex justify-center items-center max-h-screen">
+      <section className="flex justify-center items-center min-h-screen overflow-auto">
         {isLoggedIn ? (
           <Router>
             <Route path="/" component={Home} />

@@ -41,7 +41,16 @@ export const Login = () => {
                 });
             }
         } catch (error) {
-            console.error('Error al iniciar sesión:', error);
+            toast.error('Usuario Y/O Contraseña Invalidos', {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
         }
     };
 
