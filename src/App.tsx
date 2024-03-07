@@ -1,5 +1,7 @@
 import { Route, Router } from "wouter";
 
+import { useAuth } from "./hooks/useAuth";
+
 import { Footer } from './components/Footer'
 import { Login } from './components/Login'
 import { Header } from './components/core/Header'
@@ -8,7 +10,6 @@ import { ToastContainer } from 'react-toastify';
 import { Originals } from './pages/Originals'
 import { Watchlist } from './pages/Watchlist'
 import { Home } from './pages/Home'
-import { useAuth } from "./hooks/useAuth";
 
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css'

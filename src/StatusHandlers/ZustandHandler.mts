@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { ChangeEvent } from 'react';
 
 interface Movie {
     id: number;
@@ -8,23 +9,22 @@ interface Movie {
     posterPath: string;
 }
 
-interface MovieState {
+interface StoreState {
     favorites: Movie[];
+    search: string;
     addFavorite: (movie: Movie) => void;
     removeFavorite: (movieId: number) => void;
+    setSearch: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const useStore = create<MovieState>((set) => ({
+export const useStore = create<StoreState>((set) => ({
     favorites: [],
-    addFavorite: (movie) => set((state) => {
-        // Verificar si la película ya está en favoritos para evitar duplicados
-        const isAlreadyFavorite = state.favorites.some((fav) => fav.id === movie.id);
-        if (!isAlreadyFavorite) {
-            return { favorites: [...state.favorites, movie] };
-        }
-        return state;
-    }),
-    removeFavorite: (movieId) => set((state) => {
-        return { favorites: state.favorites.filter((movie) => movie.id !== movieId) };
-    }),
+    search: '',
+    addFavorite: (movie) => set((state) => ({
+        favorites: state.favorites.some((fav) => fav.id === movie.id) ? state.favorites : [...state.favorites, movie]
+    })),
+    removeFavorite: (movieId) => set((state) => ({
+        favorites: state.favorites.filter((movie) => movie.id !== movieId)
+    })),
+    setSearch: (event) => set((state) => ({ ...state, search: event.target.value })),
 }));

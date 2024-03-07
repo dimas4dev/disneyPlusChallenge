@@ -1,29 +1,40 @@
 import { useEffect, useState } from 'react';
+
+import { API_KEY, API_URL } from '../config/index.mts';
+import { useStore } from '../StatusHandlers/ZustandHandler.mts';
+
 import { MovieCard } from '../components/core/MovieCard';
 import { ResponsiveContainer } from '../components/core/Container';
-import { API_KEY, API_URL } from '../config/index.mts';
 
 
 export const Originals = () => {
     const [movies, setMovies] = useState([]);
+    const { search } = useStore();
 
     useEffect(() => {
-        const url = `${API_URL}3/movie/top_rated?language=en-US&page=1https://api.themoviedb.org/3/movie/popular?language=en-US&page=1`;
-        const options = {
-            method: 'GET',
-            headers: {
-                accept: 'application/json',
-                Authorization: `Bearer ${API_KEY}`
-            }
-        };
+        const fetchMovies = async () => {
+            const url = `${API_URL}3/movie/top_rated?language=en-US&page=1https://api.themoviedb.org/3/movie/popular?language=en-US&page=1`;
+            const options = {
+                method: 'GET',
+                headers: {
+                    accept: 'application/json',
+                    Authorization: `Bearer ${API_KEY}`
+                }
+            };
 
-        fetch(url, options)
-            .then(res => res.json())
-            .then(json => {
-                setMovies(json.results);
-            })
-            .catch(err => console.error('error:' + err));
-    }, []);
+            try {
+                const res = await fetch(url, options);
+                const json = await res.json();
+                const filteredMovies = search ?
+                    json.results.filter((movie: { title: string }) => movie.title.toLowerCase().includes(search.toLowerCase())) :
+                    json.results;
+                setMovies(filteredMovies);
+            } catch (error) {
+                console.error('error:', error);
+            }
+        }
+        fetchMovies();
+    }, [search]);
 
     return (
         <ResponsiveContainer>

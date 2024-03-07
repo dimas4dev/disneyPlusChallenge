@@ -1,9 +1,10 @@
-import { useInputChange } from '../../hooks/handleInputChange';
-import { useAuth } from '../../hooks/useAuth';
-import { Button } from '../core/Button';
-import { InputComponent } from '../core/Input';
 import { toast } from 'react-toastify';
 import { useLocalStorage } from 'usehooks-ts'
+
+import { useAuth } from '../../hooks/useAuth';
+import { useInputChange } from '../../hooks/handleInputChange';
+import { Button } from '../core/Button';
+import { InputComponent } from '../core/Input';
 
 
 export const Login = () => {

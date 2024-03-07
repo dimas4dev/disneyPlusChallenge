@@ -1,4 +1,5 @@
 import { useStore } from "../StatusHandlers/ZustandHandler.mts"
+
 import { MovieCard } from '../components/core/MovieCard';
 import { ResponsiveContainer } from '../components/core/Container';
 

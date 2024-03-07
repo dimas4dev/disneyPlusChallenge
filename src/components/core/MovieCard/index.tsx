@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useStore } from "../../../StatusHandlers/ZustandHandler.mjs";
 
 interface MovieCardProps {

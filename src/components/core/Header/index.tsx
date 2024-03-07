@@ -1,19 +1,20 @@
 import { useState } from 'react';
-import DisneyIcon from '../../../assets/DisneyIcon.svg';
-import { InputComponent } from '../Input';
 import { Link } from 'wouter';
-import { useInputChange } from '../../../hooks/handleInputChange';
 import { Bars3BottomLeftIcon, XMarkIcon } from '@heroicons/react/24/solid'
+
+import { InputComponent } from '../Input';
 import { useAuth } from '../../../hooks/useAuth';
+import { useStore } from '../../../StatusHandlers/ZustandHandler.mts';
+
+import DisneyIcon from '../../../assets/DisneyIcon.svg';
 
 interface HeaderProps {
     isLogin?: boolean;
 }
 
 export const Header: React.FC<HeaderProps> = ({ isLogin = false }) => {
-
-    const { inputs, handleInputChange } = useInputChange();
     const { logout } = useAuth();
+    const { search, setSearch } = useStore();
 
 
     const linksHeader = [
@@ -22,7 +23,6 @@ export const Header: React.FC<HeaderProps> = ({ isLogin = false }) => {
         { name: 'Originals', path: '/originals' },
     ]
 
-    const { search } = inputs;
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
@@ -40,7 +40,7 @@ export const Header: React.FC<HeaderProps> = ({ isLogin = false }) => {
                             <InputComponent
                                 type='text'
                                 placeholder='Ingresa lo que deseas buscar'
-                                onChange={handleInputChange}
+                                onChange={setSearch}
                                 value={search}
                                 name='search'
                                 id='searchInput'
