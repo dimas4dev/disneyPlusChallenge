@@ -5,6 +5,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { useInputChange } from '../../hooks/handleInputChange';
 import { Button } from '../core/Button';
 import { InputComponent } from '../core/Input';
+import { HOST } from '../../config/index.mts';
 
 
 export const Login = () => {
@@ -16,7 +17,7 @@ export const Login = () => {
     const handleLogin = async () => {
         const { email, password } = inputs;
         try {
-            const request = await fetch('http://localhost:3000/users');
+            const request = await fetch(`${HOST}users`);
             const users = await request.json();
             const user = users.find((user: { email: string; password: string; }) => user.email === email && user.password === password);
 
