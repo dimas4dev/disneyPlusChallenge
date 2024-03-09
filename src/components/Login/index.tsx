@@ -11,28 +11,21 @@ import { HOST } from '../../config/index.mts';
 export const Login = () => {
     const { inputs, handleInputChange } = useInputChange();
     const { login } = useAuth();
-    const [token, setToken] = useLocalStorage<string>('token', '');
-    const [, setUserData] = useLocalStorage<object>('user', {})
+    const [emailStorage, setEmailStorage] = useLocalStorage<string>('email', '');
 
-
-
+    const [, setIsLoggedIn] = useLocalStorage<boolean>('isLoggedIn', false);
     const handleLogin = async () => {
         const { email, password } = inputs;
         try {
-            const request = await fetch(`${HOST}auth/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
+            const request = await fetch(`${HOST}users`);
+            const users = await request.json();
+            const user = users.find((user: { email: string; password: string; }) => user.email === email && user.password === password);
 
-            }).then(async response => {
-                const data = await response.json();
-                await setToken(data.token);
-                await setUserData(data.user)
-            });
+            setEmailStorage(user.email);
+            setIsLoggedIn(true);
 
-            if (token) {
+
+            if (emailStorage || user) {
                 login();
                 toast.success('Sesion Iniciada', {
                     position: "top-center",
@@ -80,7 +73,6 @@ export const Login = () => {
                 value={inputs.email}
                 id="emailInput"
                 style={{ margin: '12px' }}
-                required
             />
             <InputComponent
                 name="password"
