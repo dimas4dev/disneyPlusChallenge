@@ -16,10 +16,12 @@ export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useLocalStorage<boolean>('isLoggedIn', false);
-    const [, setEmailStorage] = useLocalStorage<string>('email', '');
+    const [, setToken] = useLocalStorage<string>('token', '');
+    const [, setUserData] = useLocalStorage<object>('user', {})
+
 
     const login = () => setIsLoggedIn(true);
-    const logout = () => { setIsLoggedIn(false); setEmailStorage('') };
+    const logout = () => { setUserData({}); setToken('') };
 
     return (
         <AuthContext.Provider value={{ isLoggedIn, login, logout }}>

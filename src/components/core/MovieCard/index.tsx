@@ -59,11 +59,11 @@ export const MovieCard: React.FC<MovieCardProps> = ({ id, title, releaseDate, ov
                 <p className="text-gray-600 text-sm">
                     {new Date(releaseDate).getFullYear()}
                 </p>
-                {/*
+
                 <p className="text-gray-600 text-sm">
                     {overview}
                 </p>
-                */}
+
             </div>
         </div>
     );

@@ -19,8 +19,8 @@ export const Header: React.FC<HeaderProps> = ({ isLogin = false }) => {
 
     const linksHeader = [
         { name: 'Home', path: '/' },
-        { name: 'Watchlist', path: '/watchlist' },
-        { name: 'Originals', path: '/originals' },
+        // { name: 'Watchlist', path: '/watchlist' },
+        // { name: 'Originals', path: '/originals' },
     ]
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,22 +29,11 @@ export const Header: React.FC<HeaderProps> = ({ isLogin = false }) => {
         <>
             {isLogin ? (
                 <header className="text-white p-4">
-                    <div className="flex justify-between items-center">
-                        <img src={DisneyIcon} alt="DisneyIcon" className="h-12 md:h-24" />
+                    <div className="flex justify-center items-center">
                         <div className="md:hidden">
                             <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
                                 {isMenuOpen ? <XMarkIcon className="h-8 w-8" /> : <Bars3BottomLeftIcon className="h-8 w-8" />}
                             </button>
-                        </div>
-                        <div className="hidden md:block">
-                            <InputComponent
-                                type='text'
-                                placeholder='Ingresa lo que deseas buscar'
-                                onChange={setSearch}
-                                value={search}
-                                name='search'
-                                id='searchInput'
-                            />
                         </div>
                         {isMenuOpen ?
                             <nav className={`${isMenuOpen ? 'fixed inset-0 z-50' : 'hidden'} md:hidden bg-opacity-75`}>
@@ -73,7 +62,7 @@ export const Header: React.FC<HeaderProps> = ({ isLogin = false }) => {
                 </header>
             ) :
                 <header className='flex justify-center items-center h-24'>
-                    <img className="h-auto max-h-full" src={DisneyIcon} alt="DisneyIcon" />
+                    {/* <img className="h-auto max-h-full" src={DisneyIcon} alt="DisneyIcon" /> */}
                 </header>}
         </>
     )
